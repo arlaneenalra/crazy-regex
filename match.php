@@ -1,27 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-$cases = array(
-    'case1',
-    'case2',
-    'case3',
-    'case4',
-    'case5',
-    'case6',
-    'case7',
-    'case8',
-    'case9',
-    'case10',
-    'case11',
-    'case12',
-    'case13',
-    'case14',
-    'case15',
-);
-
-foreach ($cases as $case) {
-    $in = file_get_contents('cases/' . $case . '.in');
-    $out = file_get_contents('cases/' . $case . '.out');
+foreach (glob('cases/*') as $case) {
+    $in = file_get_contents($case . '/in');
+    $out = file_get_contents($case . '/out');
 
     $test_out = mangle($in);
 
