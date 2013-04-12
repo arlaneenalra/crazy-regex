@@ -11,6 +11,7 @@ $cases = array(
     'case7',
     'case8',
     'case9',
+    'case10',
 );
 
 foreach ($cases as $case) {
