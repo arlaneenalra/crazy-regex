@@ -10,6 +10,7 @@ $cases = array(
     'case6',
     'case7',
     'case8',
+    'case9',
 );
 
 foreach ($cases as $case) {
@@ -30,14 +31,6 @@ foreach ($cases as $case) {
 
 
 function mangle($in) {
-
-    //$matches = array();
-    //preg_match('/^(.*)(<\/?.+>)$/s', $html, $matches);
-    //var_dump($matches);
-
-    // last unclosed tag
-    //$html = preg_replace('/^(.*)<[^>]*$/s', "$1", $html);
-
 
     return preg_replace('/^(.*\S)\s*(<[^>]*|\s\w+)$/s', "$1", $in);
 
