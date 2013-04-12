@@ -40,8 +40,6 @@ foreach ($cases as $case) {
 function mangle($in) {
     
     $pattern ='/^(.*?\S)\s*(<[^>]*|\s\w+|)$/s'; 
-    $matches = array();
-    preg_match($pattern, $in, $matches);
     return preg_replace($pattern, "$1", $in);
 
 }
