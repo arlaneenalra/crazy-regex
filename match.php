@@ -16,6 +16,7 @@ $cases = array(
     'case12',
     'case13',
     'case14',
+    'case15',
 );
 
 foreach ($cases as $case) {
@@ -27,6 +28,7 @@ foreach ($cases as $case) {
     echo "Handling with $case";
     if ($out != $test_out) {
         echo "\n";
+        echo "Input:\n \"$in\"\n\n";
         echo "Actual output:\n \"$test_out\"\n\n";
         echo "Expected output:\n \"$out\"\n\n";
     } else {
@@ -36,8 +38,11 @@ foreach ($cases as $case) {
 
 
 function mangle($in) {
-
-    return preg_replace('/^(.*\S)\s*(<[^>]*|\s\w+)$/s', "$1", $in);
+    
+    $pattern ='/^(.*?\S)\s*(<[^>]*|\s\w+|)$/s'; 
+    $matches = array();
+    preg_match($pattern, $in, $matches);
+    return preg_replace($pattern, "$1", $in);
 
 }
 
