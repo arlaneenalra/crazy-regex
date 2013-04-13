@@ -1,27 +1,26 @@
 #!/usr/bin/env php
 <?php
 
-foreach (glob('cases/*') as $case) {
-    $in = file_get_contents($case . '/in');
-    $out = file_get_contents($case . '/out');
+function mangle($in) {
+    $pattern ='/^\s*(.*?\S)\s*(<[^>]*|\s\w+|)$/sD'; 
+    return preg_replace($pattern, "$1", $in);
+}
 
-    $test_out = mangle($in);
+class MatchTest extends PHPUnit_Framework_TestCase {
+    public function provider() {
+        foreach (glob('cases/*') as $case) {
+            $data[] = array(file_get_contents($case . '/in'),
+                            file_get_contents($case . '/out'));
+        }
+        return $data;
+    }
 
-    echo "Handling with $case";
-    if ($out != $test_out) {
-        echo "\n";
-        echo "Input:\n \"$in\"\n\n";
-        echo "Actual output:\n \"$test_out\"\n\n";
-        echo "Expected output:\n \"$out\"\n\n";
-    } else {
-        echo "...OK\n";
+    /**
+     * @dataProvider provider
+     */
+    public function testMatch($input, $expected) {
+        $actual = mangle($input);
+        $this->assertEquals($actual, $expected);
     }
 }
 
-
-function mangle($in) {
-    
-    $pattern ='/^\s*(.*?\S)\s*(<[^>]*|\s\w+|)$/sD'; 
-    return preg_replace($pattern, "$1", $in);
-
-}
