@@ -21,7 +21,7 @@ foreach (glob('cases/*') as $case) {
 
 function mangle($in) {
     
-    $pattern ='/^(.*?\S)\s*(<[^>]*|\s\w+|)$/sD'; 
+    $pattern ='/^\s*(.*?\S)\s*(<[^>]*|\s\w+|)$/sD'; 
     return preg_replace($pattern, "$1", $in);
 
 }
